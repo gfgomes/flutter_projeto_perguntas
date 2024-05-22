@@ -5,10 +5,15 @@ import 'resultado.dart';
 
 void main() => runApp(PerguntasApp());
 
+//Classe componente
+class PerguntasApp extends StatefulWidget {
+  _PerguntasAppState createState() => _PerguntasAppState();
+}
+
 //Classe que genrencia o estado do componente PerguntasApp
 class _PerguntasAppState extends State<PerguntasApp> {
-  var _perguntaSelecionada = 0;
-  final _perguntas = const [
+  var _m_perguntaSelecionada = 0;
+  final _m_list_perguntas = const [
     {
       'texto': 'Qual é sua cor favorita?',
       'respostas': [
@@ -38,38 +43,34 @@ class _PerguntasAppState extends State<PerguntasApp> {
     }
   ];
 
-  void _responder() {
-    if (temPerguntaSelecionada) {
-      setState(() {
-        _perguntaSelecionada++;
-      });
-    }
-  }
-
-  bool get temPerguntaSelecionada {
-    return _perguntaSelecionada < _perguntas.length;
+  bool get propTemPerguntaSelecionada {
+    return _m_perguntaSelecionada < _m_list_perguntas.length;
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Perguntas'),
         ),
-        body: temPerguntaSelecionada
+        body: propTemPerguntaSelecionada
             ? Questionario(
-                perguntas: _perguntas,
-                perguntaSelecionada: _perguntaSelecionada,
-                fnQuandoResponder: _responder,
+                perguntas: _m_list_perguntas,
+                perguntaSelecionada: _m_perguntaSelecionada,
+                fnQuandoResponder: _fnResponder,
               )
             : Resultado(),
       ),
     );
   }
-}
 
-//Classe componente
-class PerguntasApp extends StatefulWidget {
-  _PerguntasAppState createState() => _PerguntasAppState();
+  void _fnResponder() {
+    if (propTemPerguntaSelecionada == true) {
+      setState(() {
+        _m_perguntaSelecionada++;
+      });
+    }
+  }
 }
