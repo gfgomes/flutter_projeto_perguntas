@@ -5,9 +5,15 @@ import 'resultado.dart';
 
 void main() => runApp(PerguntasApp());
 
+//Classe componente
+class PerguntasApp extends StatefulWidget {
+  _PerguntasAppState createState() => _PerguntasAppState();
+}
+
 //Classe que genrencia o estado do componente PerguntasApp
 class _PerguntasAppState extends State<PerguntasApp> {
   var _perguntaSelecionada = 0;
+
   final _perguntas = const [
     {
       'texto': 'Qual é sua cor favorita?',
@@ -67,9 +73,4 @@ class _PerguntasAppState extends State<PerguntasApp> {
       ),
     );
   }
-}
-
-//Classe componente
-class PerguntasApp extends StatefulWidget {
-  _PerguntasAppState createState() => _PerguntasAppState();
 }
